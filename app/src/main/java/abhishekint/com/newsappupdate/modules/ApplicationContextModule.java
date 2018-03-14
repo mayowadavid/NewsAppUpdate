@@ -1,4 +1,4 @@
-package abhishekint.com.newsappupdate;
+package abhishekint.com.newsappupdate.modules;
 
 import android.content.Context;
 

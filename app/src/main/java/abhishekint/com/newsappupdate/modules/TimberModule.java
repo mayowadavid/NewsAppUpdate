@@ -1,4 +1,4 @@
-package abhishekint.com.newsappupdate;
+package abhishekint.com.newsappupdate.modules;
 
 import dagger.Module;
 
@@ -7,5 +7,5 @@ import dagger.Module;
  */
 
 @Module
-public class GlideInitModule {
+public class TimberModule {
 }

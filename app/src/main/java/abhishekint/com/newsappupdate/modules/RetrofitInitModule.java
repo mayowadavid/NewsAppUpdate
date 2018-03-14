@@ -1,6 +1,4 @@
-package abhishekint.com.newsappupdate;
-
-import java.util.concurrent.TimeUnit;
+package abhishekint.com.newsappupdate.modules;
 
 import javax.inject.Named;
 
