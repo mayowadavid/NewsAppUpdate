@@ -12,6 +12,7 @@ public class NewsApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        dataManagerInterface= DaggerDataManagerInterface.builder().build();
+        dataManagerInterface= DaggerDataManagerInterface.builder()
+                .applicationContextModule(new ApplicationContextModule(this)).build();
     }
 }
