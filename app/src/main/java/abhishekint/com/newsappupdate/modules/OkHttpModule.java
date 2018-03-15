@@ -14,7 +14,6 @@ import okhttp3.OkHttpClient;
 @Module
 public class OkHttpModule {
 
-    @Named("object_OkHttp")
     @Provides
     public OkHttpClient getOkHttp()
     {
