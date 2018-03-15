@@ -14,6 +14,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 import retrofit2.Retrofit;
+import timber.log.Timber;
 
 /**
  * Created by abhishek on 14-03-2018.
