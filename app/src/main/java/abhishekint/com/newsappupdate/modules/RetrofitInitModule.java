@@ -12,11 +12,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by abhishek on 14-03-2018.
  */
 
-@Module(includes = OkHttpModule.class)
+@Module
 public class RetrofitInitModule {
 
     @Provides
-    public Retrofit getClient(String baseURL,@Named("object_OkHttp") OkHttpClient okHttpClient) {
+    public Retrofit getClient(String baseURL,OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .baseUrl(baseURL)
                 .client(okHttpClient)
