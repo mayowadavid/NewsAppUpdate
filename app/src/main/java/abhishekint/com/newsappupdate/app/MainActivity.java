@@ -1,4 +1,4 @@
-package abhishekint.com.newsappupdate;
+package abhishekint.com.newsappupdate.app;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import javax.inject.Inject;
 
+import abhishekint.com.newsappupdate.NewsApplication;
+import abhishekint.com.newsappupdate.R;
 import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
