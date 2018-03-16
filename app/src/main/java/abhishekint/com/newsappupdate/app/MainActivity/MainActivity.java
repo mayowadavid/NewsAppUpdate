@@ -1,4 +1,4 @@
-package abhishekint.com.newsappupdate.app;
+package abhishekint.com.newsappupdate.app.MainActivity;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;

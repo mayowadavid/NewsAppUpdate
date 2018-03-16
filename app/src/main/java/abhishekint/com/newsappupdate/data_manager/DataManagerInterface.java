@@ -1,6 +1,6 @@
 package abhishekint.com.newsappupdate.data_manager;
 
-import abhishekint.com.newsappupdate.app.MainActivity;
+import abhishekint.com.newsappupdate.app.MainActivity.MainActivity;
 import abhishekint.com.newsappupdate.modules.ActivityContextModule;
 import abhishekint.com.newsappupdate.modules.ApplicationContextModule;
 import abhishekint.com.newsappupdate.modules.BaseUrlModule;
