@@ -22,20 +22,26 @@ import timber.log.Timber;
  * Created by abhishek on 14-03-2018.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainActivityMethodCall{
 
     @Inject
     public Retrofit retrofit;
     @BindView(R.id.activity_main_tv)
     TextView activity_main_tv;
     Unbinder unbinder;
+    MainPresenter mainPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ((NewsApplication) getApplicationContext()).getNewsAppComponent().b(this);
+        presenterInit();
         unbinder = ButterKnife.bind(this);
+    }
+
+    private void presenterInit() {
+        mainPresenter=new MainPresenter(this);
     }
 
     @OnClick(R.id.activity_main_tv)

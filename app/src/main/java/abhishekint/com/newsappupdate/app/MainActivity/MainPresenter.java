@@ -5,4 +5,7 @@ package abhishekint.com.newsappupdate.app.MainActivity;
  */
 
 public class MainPresenter {
+
+    public MainPresenter(MainActivityMethodCall mainActivityMethodCall) {
+    }
 }
