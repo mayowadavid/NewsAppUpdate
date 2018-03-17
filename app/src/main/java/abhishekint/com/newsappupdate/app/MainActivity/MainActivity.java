@@ -58,4 +58,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityMetho
         super.onDestroy();
         unbinder.unbind();
     }
+
+    @Override
+    public void firstTimeApplaunch() {
+    }
+
+    @Override
+    public void launchFragment() {
+    }
 }

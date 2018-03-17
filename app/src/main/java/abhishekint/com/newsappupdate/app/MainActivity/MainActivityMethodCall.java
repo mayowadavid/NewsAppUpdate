@@ -5,4 +5,6 @@ package abhishekint.com.newsappupdate.app.MainActivity;
  */
 
 public interface MainActivityMethodCall {
+    void firstTimeApplaunch();
+    void launchFragment();
 }
