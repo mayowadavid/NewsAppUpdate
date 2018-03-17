@@ -3,7 +3,9 @@ package abhishekint.com.newsappupdate.app.MainActivity;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import javax.inject.Inject;
@@ -26,8 +28,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityMetho
 
     @Inject
     public Retrofit retrofit;
-    @BindView(R.id.activity_main_tv)
-    TextView activity_main_tv;
+    @BindView(R.id.main_frame_layout)
+    FrameLayout main_frame_layout;
+    @BindView(R.id.main_bottom_navigation_view)
+    BottomNavigationView main_bottom_navigation_view;
     Unbinder unbinder;
     MainPresenter mainPresenter;
 
@@ -44,10 +48,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityMetho
         mainPresenter=new MainPresenter(this);
     }
 
-    @OnClick(R.id.activity_main_tv)
+    /*@OnClick(R.id.activity_main_tv)
     public void buttonClick() {
         activity_main_tv.setText("Awesome Life!");
-    }
+    }*/
 
     @Override
     protected void onDestroy() {
