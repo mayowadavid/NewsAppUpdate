@@ -22,7 +22,7 @@ public class NewsApplication extends Application {
         dataManagerInterface= DaggerDataManagerInterface.builder()
                 .applicationContextModule(new ApplicationContextModule(this)).build();
         if (BuildConfig.DEBUG)
-            Timber.plant(new TimberDubug());
+            Timber.plant(new Timber.DebugTree());
         else
             Timber.plant(new TimberRelease());
     }
