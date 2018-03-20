@@ -2,6 +2,7 @@ package abhishekint.com.newsappupdate.modules;
 
 import android.content.Context;
 
+import abhishekint.com.newsappupdate.schedulers.AppSchedulerProvider;
 import dagger.Module;
 import dagger.Provides;
 
@@ -20,5 +21,10 @@ public class ApplicationContextModule {
     @Provides
     public Context getApplicationContext() {
         return applicationContext;
+    }
+
+    @Provides
+    public AppSchedulerProvider providesApplicationSchedulerProvider() {
+        return new AppSchedulerProvider();
     }
 }
