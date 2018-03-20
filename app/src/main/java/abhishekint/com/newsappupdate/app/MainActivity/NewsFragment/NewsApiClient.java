@@ -3,6 +3,7 @@ package abhishekint.com.newsappupdate.app.MainActivity.NewsFragment;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 /**
@@ -10,6 +11,6 @@ import retrofit2.http.Url;
  */
 
 public interface NewsApiClient {
-    @GET
-    Observable<Void> getTopRatedMovies(@Url String url);
+    @GET("https://newsapi.org/v1/sources")
+    Observable<NewsSourceDataModel> getTopRatedMovies(@Query("language") String url);
 }

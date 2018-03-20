@@ -1,6 +1,7 @@
 package abhishekint.com.newsappupdate.app.MainActivity.NewsFragment;
 
 import io.reactivex.Observable;
+import timber.log.Timber;
 
 /**
  * Created by abhishek on 19-03-2018.
@@ -13,8 +14,9 @@ public class NewsApiHit {
         this.newsApiClient=newsApiClient;
     }
 
-    public Observable<String> loadNewsDataFromApi()
+    public Observable<NewsSourceDataModel> loadNewsDataFromApi()
     {
-        return  Observable.just("abhi","aakash","patta","vinay","shalu","rahul");
+        return newsApiClient.getTopRatedMovies("en");
+        /*return  Observable.just("abhi","aakash","patta","vinay","shalu","rahul");*/
     }
 }

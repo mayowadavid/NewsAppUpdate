@@ -60,7 +60,7 @@ public class NewsFragment extends Fragment implements NewsFragMethodCall{
     }
 
     @Override
-    public void interfaceOnNextCall(String value) {
-        Toast.makeText(getActivity(), value, Toast.LENGTH_SHORT).show();
+    public void interfaceOnNextCall(NewsSourceDataModel value) {
+        Toast.makeText(getActivity(), ""+value.getSources().get(0).getId(), Toast.LENGTH_SHORT).show();
     }
 }

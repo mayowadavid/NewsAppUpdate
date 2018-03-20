@@ -5,5 +5,5 @@ package abhishekint.com.newsappupdate.app.MainActivity.NewsFragment;
  */
 
 public interface NewsFragMethodCall {
-    void interfaceOnNextCall(String value);
+    void interfaceOnNextCall(NewsSourceDataModel value);
 }
