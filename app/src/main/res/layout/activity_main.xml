@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:id="@+id/main_bottom_navigation_view"
+        android:background="@color/colorBlackShade3"
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_navigation_item"
         app:itemTextColor="@drawable/bottom_navigation_item_state"

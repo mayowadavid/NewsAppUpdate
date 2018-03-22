@@ -8,7 +8,7 @@ import java.util.List;
  * Created by abhishek on 20-03-2018.
  */
 
-public class NewsSourceDataModel {
+public class NewsSourceIconDataModel {
     @SerializedName("server_response")
     private List<NewsIconInner> server_response;
 
@@ -31,31 +31,6 @@ public class NewsSourceDataModel {
 
         public void setImg_id(String img_id) {
             this.img_id = img_id;
-        }
-    }
-
-    @SerializedName("sources")
-    private List<NewsInner> sources;
-
-    public List<NewsInner> getSources() {
-        return sources;
-    }
-
-    public void setSources(List<NewsInner> sources) {
-        this.sources = sources;
-    }
-
-    public class NewsInner
-    {
-        @SerializedName("id")
-        private String id;
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
         }
     }
 }

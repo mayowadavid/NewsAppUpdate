@@ -1,7 +1,10 @@
 package abhishekint.com.newsappupdate.modules;
 
+import javax.inject.Named;
+
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.NewsApiClient;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.NewsApiHit;
+import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.NewsIconClient;
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
@@ -14,14 +17,26 @@ import retrofit2.Retrofit;
 public class NetworkModule {
 
     @Provides
-    public NewsApiClient providesNewsApiClient(Retrofit retrofit)
+    public NewsApiClient providesNewsApiClient(@Named("parent_retrofit") Retrofit retrofit)
     {
      return retrofit.create(NewsApiClient.class);
     }
 
     @Provides
-    public NewsApiHit providesNewsFeed(NewsApiClient newsApiClient)
+    public NewsIconClient providesIconApiClient(@Named("icon_retrofit") Retrofit retrofit)
     {
-        return new NewsApiHit(newsApiClient);
+        return retrofit.create(NewsIconClient.class);
     }
+
+    @Provides
+    public NewsApiHit providesNewsFeed(NewsApiClient newsApiClient,NewsIconClient newsIconClient)
+    {
+        return new NewsApiHit(newsApiClient,newsIconClient);
+    }
+
+    /*@Provides
+    public NewsIconHit providesIconFeed(NewsIconClient newsIconClient)
+    {
+        return new NewsIconHit(newsIconClient);
+    }*/
 }

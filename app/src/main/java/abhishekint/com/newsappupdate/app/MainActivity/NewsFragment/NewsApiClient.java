@@ -12,5 +12,5 @@ import retrofit2.http.Url;
 
 public interface NewsApiClient {
     @GET("https://newsapi.org/v1/sources")
-    Observable<NewsSourceDataModel> getTopRatedMovies(@Query("language") String url);
+    Observable<NewsSourceDataModel> getNewsSources(@Query("language") String url);
 }

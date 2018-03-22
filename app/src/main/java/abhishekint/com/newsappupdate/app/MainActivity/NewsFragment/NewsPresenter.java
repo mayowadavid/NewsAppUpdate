@@ -18,7 +18,7 @@ public class NewsPresenter {
     AppSchedulerProvider appSchedulerProvider;
     NewsFragMethodCall newsFragMethodCall;
 
-    public NewsPresenter(NewsApiHit newsApiHit, AppSchedulerProvider appSchedulerProvider,NewsFragMethodCall newsFragMethodCall ) {
+    public NewsPresenter(NewsApiHit newsApiHit,AppSchedulerProvider appSchedulerProvider,NewsFragMethodCall newsFragMethodCall ) {
         this.newsApiHit=newsApiHit;
         this.appSchedulerProvider=appSchedulerProvider;
         this.newsFragMethodCall=newsFragMethodCall;
@@ -50,6 +50,33 @@ public class NewsPresenter {
 
                     }
                 });
+    }
 
+    public void loadNewsIcon(final NewsSourceDataModel newsSourceDataModel)
+    {
+        /*Observable<String>  observable=*/newsApiHit.loadNewsIconFromApi()
+            .subscribeOn(appSchedulerProvider.io())
+            .observeOn(appSchedulerProvider.ui())
+            .subscribe(new Observer<NewsSourceIconDataModel>() {
+                @Override
+                public void onSubscribe(Disposable d) {
+                    Timber.e(""+d);
+                }
+
+                @Override
+                public void onNext(NewsSourceIconDataModel newsSourceIconDataModel) {
+                    newsFragMethodCall.interfaceOnIconNextCall(newsSourceIconDataModel,newsSourceDataModel);
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    Timber.e(e);
+                }
+
+                @Override
+                public void onComplete() {
+
+                }
+            });
     }
 }

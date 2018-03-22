@@ -16,8 +16,14 @@ import dagger.Provides;
 public class BaseUrlModule {
 
     @Provides
+    @Named("parent_base_url")
     public String getBaseUrl(Context applicationContext) {
         return applicationContext.getString(R.string.base_url);
     }
 
+    @Provides
+    @Named("icon_base_url")
+    public String getBaseUrlIcon(Context applicationContext) {
+        return applicationContext.getString(R.string.base_url_icon);
+    }
 }

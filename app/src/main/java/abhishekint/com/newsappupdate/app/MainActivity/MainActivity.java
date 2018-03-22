@@ -33,8 +33,6 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements MainActivityMethodCall, BottomNavigationView.OnNavigationItemSelectedListener {
 
-    @Inject
-    public Retrofit retrofit;
     @BindView(R.id.main_frame_layout)
     FrameLayout main_frame_layout;
     @BindView(R.id.main_bottom_navigation_view)

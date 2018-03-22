@@ -26,10 +26,12 @@ import io.reactivex.Observable;
 public class NewsFragment extends Fragment implements NewsFragMethodCall{
     @BindView(R.id.common_recycler_view)
     RecyclerView common_recycler_view;
-    @Inject
-    public NewsApiClient newsApiClient;
+    /*@Inject
+    public NewsApiClient newsApiClient;*/
     @Inject
     public NewsApiHit newsApiHit;
+    /*@Inject
+    public NewsIconClient newsIconClient;*/
     @Inject
     public AppSchedulerProvider appSchedulerProvider;
     View view;
@@ -48,12 +50,11 @@ public class NewsFragment extends Fragment implements NewsFragMethodCall{
     }
 
     private void initializeRest() {
-        newsAdapter=new NewsAdapter();
         newsPresenter=new NewsPresenter(newsApiHit,appSchedulerProvider,this);
         newsPresenter.loadNewsFeed();
         layoutManager=new GridLayoutManager(getActivity(),2);
         common_recycler_view.setLayoutManager(layoutManager);
-        common_recycler_view.setAdapter(newsAdapter);
+        common_recycler_view.setNestedScrollingEnabled(false);
     }
 
     private void initializeView() {
@@ -61,6 +62,15 @@ public class NewsFragment extends Fragment implements NewsFragMethodCall{
 
     @Override
     public void interfaceOnNextCall(NewsSourceDataModel value) {
-        Toast.makeText(getActivity(), ""+value.getSources().get(0).getId(), Toast.LENGTH_SHORT).show();
+        newsPresenter.loadNewsIcon(value);
+        /*newsAdapter=new NewsAdapter(value);
+        common_recycler_view.setAdapter(newsAdapter);
+        Toast.makeText(getActivity(), ""+value.getSources().get(0).getId(), Toast.LENGTH_SHORT).show();*/
+    }
+
+    @Override
+    public void interfaceOnIconNextCall(NewsSourceIconDataModel value,NewsSourceDataModel newsSourceDataModel) {
+        newsAdapter=new NewsAdapter(value,newsSourceDataModel,getActivity());
+        common_recycler_view.setAdapter(newsAdapter);
     }
 }
