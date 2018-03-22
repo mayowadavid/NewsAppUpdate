@@ -3,6 +3,7 @@ package abhishekint.com.newsappupdate.app.MainActivity.NewsFragment;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 
@@ -12,5 +13,5 @@ import retrofit2.http.Url;
 
 public interface NewsApiClient {
     @GET("https://newsapi.org/v2/sources")
-    Observable<NewsSourceDataModel> getNewsSources(@Query("language") String url,@Query("apiKey") String apiKey);
+    Observable<NewsSourceDataModel> getNewsSources(@Query("language") String url,@Header("X-Api-Key") String apiKey);
 }
