@@ -13,14 +13,16 @@ public class NewsApiHit {
 
     NewsApiClient newsApiClient;
     NewsIconClient newsIconClient;
-    public NewsApiHit(NewsApiClient newsApiClient,NewsIconClient newsIconClient) {
+    String api_key;
+    public NewsApiHit(NewsApiClient newsApiClient,NewsIconClient newsIconClient,String api_key) {
         this.newsApiClient=newsApiClient;
         this.newsIconClient=newsIconClient;
+        this.api_key=api_key;
     }
 
     public Observable<NewsSourceDataModel> loadNewsDataFromApi()
     {
-        return newsApiClient.getNewsSources("en")
+        return newsApiClient.getNewsSources("en",api_key)
                 .filter(filterForNull());
         /*return  Observable.just("abhi","aakash","patta","vinay","shalu","rahul");*/
     }

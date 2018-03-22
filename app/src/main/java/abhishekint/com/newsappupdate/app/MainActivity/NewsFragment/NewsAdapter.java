@@ -43,7 +43,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return newsSourceDataModel.getSources().size();
+        return newsSourceIconDataModel.getServer_response().size();
     }
 
     private class ViewHolder1 extends RecyclerView.ViewHolder {

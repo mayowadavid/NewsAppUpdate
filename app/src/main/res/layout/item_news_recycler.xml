@@ -14,8 +14,9 @@
             android:id="@+id/item_news_recycler_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:alpha="0.7"
-            android:scaleType="fitXY"/>
+            android:alpha="0.9"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher_background"/>
 
         <TextView
             android:id="@+id/item_news_recycler_tv"

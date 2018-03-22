@@ -29,9 +29,9 @@ public class NetworkModule {
     }
 
     @Provides
-    public NewsApiHit providesNewsFeed(NewsApiClient newsApiClient,NewsIconClient newsIconClient)
+    public NewsApiHit providesNewsFeed(NewsApiClient newsApiClient,NewsIconClient newsIconClient,@Named("api_key") String api_key)
     {
-        return new NewsApiHit(newsApiClient,newsIconClient);
+        return new NewsApiHit(newsApiClient,newsIconClient,api_key);
     }
 
     /*@Provides

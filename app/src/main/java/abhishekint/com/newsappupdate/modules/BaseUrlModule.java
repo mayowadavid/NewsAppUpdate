@@ -26,4 +26,10 @@ public class BaseUrlModule {
     public String getBaseUrlIcon(Context applicationContext) {
         return applicationContext.getString(R.string.base_url_icon);
     }
+
+    @Provides
+    @Named("api_key")
+    public String getApiKey(Context applicationContext) {
+        return applicationContext.getString(R.string.api_key);
+    }
 }

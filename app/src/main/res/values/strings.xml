@@ -4,4 +4,5 @@
     //base url
     <string name="base_url">https://newsapi.org/v1/</string>
     <string name="base_url_icon">http://abhishekint.16mb.com/NewsApp/</string>
+    <string name="api_key">e1f3c5ef9ff2421080cb1ece283078d2</string>
 </resources>
