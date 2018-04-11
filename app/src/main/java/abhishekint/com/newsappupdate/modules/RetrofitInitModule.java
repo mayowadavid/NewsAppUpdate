@@ -17,15 +17,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitInitModule {
 
     @Provides
-    @Named("parent_retrofit")
-    public Retrofit getParentRetrofit(@Named("parent_base_url") String baseURL,OkHttpClient okHttpClient)
+    @Named("top_head_retrofit")
+    public Retrofit getTopHeadRetrofit(@Named("top_head_url") String baseURL,OkHttpClient okHttpClient)
     {
         return  getClient(baseURL, okHttpClient);
     }
 
     @Provides
-    @Named("icon_retrofit")
-    public Retrofit getIconRetrofit(@Named("icon_base_url") String baseURL,OkHttpClient okHttpClient)
+    @Named("everything_retrofit")
+    public Retrofit getEverythingRetrofit(@Named("everything_url") String baseURL,OkHttpClient okHttpClient)
+    {
+        return  getClient(baseURL, okHttpClient);
+    }
+
+    @Provides
+    @Named("source_retrofit")
+    public Retrofit getSourceRetrofit(@Named("source_url") String baseURL,OkHttpClient okHttpClient)
     {
         return  getClient(baseURL, okHttpClient);
     }

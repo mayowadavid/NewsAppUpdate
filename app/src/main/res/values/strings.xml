@@ -2,7 +2,12 @@
     <string name="app_name">NewsAppUpdate</string>
 
     //base url
-    <string name="base_url">https://newsapi.org/v1/</string>
-    <string name="base_url_icon">http://abhishekint.16mb.com/NewsApp/</string>
+    <string name="base_url_top">https://newsapi.org/v2/top-headlines/</string>
+    <string name="base_url_everything">https://newsapi.org/v2/everything/</string>
+    <string name="base_url_source">https://newsapi.org/v2/sources/</string>
+
+    //api_keys
     <string name="api_key">e1f3c5ef9ff2421080cb1ece283078d2</string>
+    <string name="api_key2">7c69175d535247f088b0663d494bd0e7</string>    //shiva
+    <string name="api_key3">0e275d0962fe47d28d84d4c6c3fbd4e7</string>   //saurabh
 </resources>

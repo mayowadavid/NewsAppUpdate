@@ -2,9 +2,9 @@ package abhishekint.com.newsappupdate.modules;
 
 import javax.inject.Named;
 
-import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.NewsApiClient;
-import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.NewsApiHit;
-import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.NewsIconClient;
+import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Interater.NewsApiClient;
+import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Interater.NewsApiHit;
+import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Interater.NewsIconClient;
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
@@ -17,16 +17,22 @@ import retrofit2.Retrofit;
 public class NetworkModule {
 
     @Provides
-    public NewsApiClient providesNewsApiClient(@Named("parent_retrofit") Retrofit retrofit)
+    public NewsApiClient providesTopHeadApiClient(@Named("top_head_retrofit") Retrofit retrofit)
     {
      return retrofit.create(NewsApiClient.class);
     }
 
     @Provides
-    public NewsIconClient providesIconApiClient(@Named("icon_retrofit") Retrofit retrofit)
+    public NewsIconClient providesEverythingApiClient(@Named("everything_retrofit") Retrofit retrofit)
     {
         return retrofit.create(NewsIconClient.class);
     }
+
+   /* @Provides
+    public NewsIconClient providesSourceApiClient(@Named("everything_retrofit") Retrofit retrofit)
+    {
+        return retrofit.create(NewsIconClient.class);
+    }*/
 
     @Provides
     public NewsApiHit providesNewsFeed(NewsApiClient newsApiClient,NewsIconClient newsIconClient,@Named("api_key") String api_key)
@@ -34,9 +40,4 @@ public class NetworkModule {
         return new NewsApiHit(newsApiClient,newsIconClient,api_key);
     }
 
-    /*@Provides
-    public NewsIconHit providesIconFeed(NewsIconClient newsIconClient)
-    {
-        return new NewsIconHit(newsIconClient);
-    }*/
 }

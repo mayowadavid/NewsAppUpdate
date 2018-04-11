@@ -16,20 +16,26 @@ import dagger.Provides;
 public class BaseUrlModule {
 
     @Provides
-    @Named("parent_base_url")
-    public String getBaseUrl(Context applicationContext) {
-        return applicationContext.getString(R.string.base_url);
+    @Named("top_head_url")
+    public String getBaseUrlTopHead(Context applicationContext) {
+        return applicationContext.getString(R.string.base_url_top);
     }
 
     @Provides
-    @Named("icon_base_url")
-    public String getBaseUrlIcon(Context applicationContext) {
-        return applicationContext.getString(R.string.base_url_icon);
+    @Named("everything_url")
+    public String getBaseUrlEverything(Context applicationContext) {
+        return applicationContext.getString(R.string.base_url_everything);
     }
 
     @Provides
     @Named("api_key")
     public String getApiKey(Context applicationContext) {
-        return applicationContext.getString(R.string.api_key);
+        return applicationContext.getString(R.string.api_key3);
+    }
+
+    @Provides
+    @Named("source_url")
+    public String getSourceKey(Context applicationContext) {
+        return applicationContext.getString(R.string.base_url_source);
     }
 }

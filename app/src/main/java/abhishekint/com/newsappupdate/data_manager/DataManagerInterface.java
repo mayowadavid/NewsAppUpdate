@@ -1,7 +1,7 @@
 package abhishekint.com.newsappupdate.data_manager;
 
 import abhishekint.com.newsappupdate.app.MainActivity.MainActivity;
-import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.NewsFragment;
+import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationLayer.NewsFragment;
 import abhishekint.com.newsappupdate.modules.ActivityContextModule;
 import abhishekint.com.newsappupdate.modules.ApplicationContextModule;
 import abhishekint.com.newsappupdate.modules.BaseUrlModule;

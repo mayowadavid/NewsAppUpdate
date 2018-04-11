@@ -14,6 +14,23 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorBlackShade2"></android.support.v7.widget.Toolbar>
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:background="@android:color/transparent">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="main"
+                android:layout_weight="1"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Source"
+                android:layout_weight="1"/>
+        </LinearLayout>-->
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView

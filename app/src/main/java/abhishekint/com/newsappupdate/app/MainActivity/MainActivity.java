@@ -3,28 +3,20 @@ package abhishekint.com.newsappupdate.app.MainActivity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import javax.inject.Inject;
 
 import abhishekint.com.newsappupdate.NewsApplication;
 import abhishekint.com.newsappupdate.R;
-import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.NewsFragment;
-import butterknife.BindColor;
+import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationLayer.NewsFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
-import retrofit2.Retrofit;
 import timber.log.Timber;
 
 /**
