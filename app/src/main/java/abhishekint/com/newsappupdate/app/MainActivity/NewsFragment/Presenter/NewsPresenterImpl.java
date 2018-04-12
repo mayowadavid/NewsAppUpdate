@@ -4,12 +4,14 @@ import android.util.Log;
 
 import java.util.List;
 
+import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Adapter.SubAdapter.SourceItemAdapterLayer;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Adapter.SubAdapter.ViewHolderLayer;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Adapter.SubAdapter.ViewLayer;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Interater.NewsApiHit;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Interater.NewsApiHitInterface;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationLayer.NewsView;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationModel.NewsModel;
+import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationModel.SourceModel;
 import abhishekint.com.newsappupdate.schedulers.AppSchedulerProvider;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -52,6 +54,49 @@ public class NewsPresenterImpl implements NewsPresenter{
         this.viewLayer=viewLayer;
         viewLayer.getAllTopName(newsApiHit.fillModelWithTopName());
     }
+
+    @Override
+    public void getSources(ViewLayer viewLayer) {
+        viewLayer.getAllSourcesName(newsApiHit.fillModelWithSourcesName());
+    }
+
+    @Override
+    public void getSourcesWithCategory(final SourceModel sourceModel, final SourceItemAdapterLayer sourceItemAdapterLayer, String nameId) {
+        newsApiHit.loadSourcesWithCategory(nameId)
+                .subscribeOn(appSchedulerProvider.io())
+                .observeOn(appSchedulerProvider.ui())
+                .subscribe(new Observer<SourceModel>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Timber.e(""+d);
+                    }
+
+                    @Override
+                    public void onNext(SourceModel sourceModel1) {
+                        //newsModel.setArticles(countryTopHeadNews.getArticles());
+                        if (sourceModel.getSources()==null)
+                        {
+                            sourceModel.setSources(sourceModel1.getSources());
+                        }
+                        else
+                        {
+                            sourceModel.getSources().addAll(sourceModel1.getSources());
+                        }
+                        sourceItemAdapterLayer.setSourceItem();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.e(e);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
 
     @Override
     public void getIndiaNews(final NewsModel newsModel, final ViewHolderLayer viewHolderLayer,String nameId,int page,int pageSize) {

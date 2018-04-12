@@ -66,6 +66,7 @@ public class IndiaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             if (newsModel.getArticles().get(position-1).getUrlToImage()!=null)
             Glide.with(context)
                     .load(newsModel.getArticles().get(position-1).getUrlToImage())
+                    .thumbnail(Glide.with(context).load(R.drawable.default_news_img))
                     .into(((NewsItemViewHolder)holder).imageView);
             else
                 Glide.with(context)

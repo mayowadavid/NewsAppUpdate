@@ -50,6 +50,7 @@ public class NewsFragment extends Fragment implements NewsView,NewsAdapterView{
 
     private void adapterInit() {
         newsPresenter.getTopName(newsAdapter);
+        newsPresenter.getSources(newsAdapter);
     }
 
     private void initializeRest() {

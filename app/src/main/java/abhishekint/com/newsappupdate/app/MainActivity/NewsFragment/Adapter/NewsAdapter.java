@@ -15,10 +15,12 @@ import java.util.List;
 import abhishekint.com.newsappupdate.R;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Adapter.NewsViewHolder.NewsItemViewHolder;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Adapter.SubAdapter.IndiaAdapter;
+import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Adapter.SubAdapter.SourceItemAdapter;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Adapter.SubAdapter.ViewHolderLayer;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Adapter.SubAdapter.ViewLayer;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationLayer.NewsAdapterView;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationModel.NewsModel;
+import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationModel.SourceModel;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Presenter.NewsPresenter;
 
 /**
@@ -30,33 +32,63 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     RecyclerView.LayoutManager layoutManager;
     Context context;
     IndiaAdapter indiaAdapter;
+    SourceItemAdapter sourceItemAdapter;
     NewsPresenter newsPresenter;
     NewsModel newsModel;
     List<NewsModel> newsModels;
+    List<SourceModel> sourceModels;
     int page=1;
     int pageSize=10;
+    List<Integer> images=new ArrayList<>();
 
     public NewsAdapter(NewsAdapterView newsAdapterView,NewsPresenter newsPresenter, Context context) {
         this.newsAdapterView = newsAdapterView;
         this.context=context;
         this.newsPresenter=newsPresenter;
         newsModel=new NewsModel();
+        images.add(R.drawable.entertainment);
+        images.add(R.drawable.science);
+        images.add(R.drawable.general);
+        images.add(R.drawable.technology);
+        images.add(R.drawable.business);
+        images.add(R.drawable.sports);
+        images.add(R.drawable.health);
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_genre,parent,false);
-        return new NewsAdapterViewHolder(view);
+        if (viewType==0)
+        {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_genre,parent,false);
+            return new NewsAdapterViewHolder(view);
+        }
+        else
+        {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_genre,parent,false);
+            return new NewsAdapterViewHolder(view);
+        }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((NewsAdapterViewHolder)holder).textView.setText(newsModels.get(position).getTopName());
-        layoutManager=new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
-        ((NewsAdapterViewHolder)holder).recyclerView.setLayoutManager(layoutManager);
-        indiaAdapter=new IndiaAdapter(context,newsAdapterView,newsPresenter,newsModels.get(position),page,pageSize);
-        ((NewsAdapterViewHolder)holder).recyclerView.setAdapter(indiaAdapter);
-        newsPresenter.getIndiaNews(newsModels.get(position),indiaAdapter,newsModels.get(position).getNameId(),page,pageSize);
+        if (holder.getItemViewType()==0)
+        {
+            ((NewsAdapterViewHolder)holder).textView.setText(newsModels.get(position).getTopName());
+            layoutManager=new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
+            ((NewsAdapterViewHolder)holder).recyclerView.setLayoutManager(layoutManager);
+            indiaAdapter=new IndiaAdapter(context,newsAdapterView,newsPresenter,newsModels.get(position),page,pageSize);
+            ((NewsAdapterViewHolder)holder).recyclerView.setAdapter(indiaAdapter);
+            newsPresenter.getIndiaNews(newsModels.get(position),indiaAdapter,newsModels.get(position).getNameId(),page,pageSize);
+        }
+        else
+        {
+            ((NewsAdapterViewHolder)holder).textView.setText(sourceModels.get(position-5).getTopSourceName());
+            layoutManager=new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
+            ((NewsAdapterViewHolder)holder).recyclerView.setLayoutManager(layoutManager);
+            sourceItemAdapter=new SourceItemAdapter(context,newsPresenter,sourceModels.get(position-5),images.get(position-5));
+            ((NewsAdapterViewHolder)holder).recyclerView.setAdapter(sourceItemAdapter);
+            newsPresenter.getSourcesWithCategory(sourceModels.get(position-5),sourceItemAdapter,sourceModels.get(position-5).getSourceId());
+        }
         /*layoutManager=new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false);
         ((NewsAdapterViewHolder)holder).recyclerView.setLayoutManager(layoutManager);
         indiaAdapter=new IndiaAdapter(context,newsAdapterView,newsPresenter,newsModel);
@@ -66,13 +98,29 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> i
     @Override
     public int getItemCount() {
         Log.e("chck for cunt","check for count"+newsModels.size());
+        if (sourceModels==null)
         return newsModels != null ? newsModels.size() : 0;
+        else
+            return newsModels.size()+sourceModels.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position==0||position==1||position==2||position==3||position==4)
+            return 0;
+        else return 1;
     }
 
     @Override
     public void getAllTopName(List<NewsModel> newsModels) {
         Log.e("chck for method","cehckf for mehod"+newsModels.size());
         this.newsModels=newsModels;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void getAllSourcesName(List<SourceModel> sourceModels) {
+        this.sourceModels=sourceModels;
         notifyDataSetChanged();
     }
 

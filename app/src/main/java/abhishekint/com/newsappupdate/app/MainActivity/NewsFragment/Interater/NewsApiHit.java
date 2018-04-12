@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationModel.NewsModel;
+import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationModel.SourceModel;
 import io.reactivex.Observable;
 import io.reactivex.functions.Predicate;
 
@@ -15,11 +16,13 @@ public class NewsApiHit {
 
     NewsApiClient newsApiClient;
     NewsIconClient newsIconClient;
+    NewsSourceClient newsSourceClient;
     public String api_key;
 
-    public NewsApiHit(NewsApiClient newsApiClient, NewsIconClient newsIconClient, String api_key) {
+    public NewsApiHit(NewsApiClient newsApiClient, NewsIconClient newsIconClient, NewsSourceClient newsSourceClient,String api_key) {
         this.newsApiClient = newsApiClient;
         this.newsIconClient = newsIconClient;
+        this.newsSourceClient=newsSourceClient;
         this.api_key = api_key;
     }
 
@@ -50,11 +53,52 @@ public class NewsApiHit {
         return newsModels;
     }
 
+    public List<SourceModel> fillModelWithSourcesName()
+    {
+        List<SourceModel> sourceModels=new ArrayList<>();
+        SourceModel sourceModel1=new SourceModel();
+        sourceModel1.setTopSourceName("All Entertainment Sources");
+        sourceModel1.setSourceId("entertainment");
+        SourceModel sourceModel2=new SourceModel();
+        sourceModel2.setTopSourceName("All Science Sources");
+        sourceModel2.setSourceId("science");
+        SourceModel sourceModel3=new SourceModel();
+        sourceModel3.setTopSourceName("All General Sources");
+        sourceModel3.setSourceId("general");
+        SourceModel sourceModel4=new SourceModel();
+        sourceModel4.setTopSourceName("All Technology Sources");
+        sourceModel4.setSourceId("technology");
+        SourceModel sourceModel5=new SourceModel();
+        sourceModel5.setTopSourceName("All Business Sources");
+        sourceModel5.setSourceId("business");
+        SourceModel sourceModel6=new SourceModel();
+        sourceModel6.setTopSourceName("All Sports Sources");
+        sourceModel6.setSourceId("sports");
+        SourceModel sourceModel7=new SourceModel();
+        sourceModel7.setTopSourceName("All Health Sources");
+        sourceModel7.setSourceId("health");
+
+        sourceModels.add(sourceModel1);
+        sourceModels.add(sourceModel2);
+        sourceModels.add(sourceModel3);
+        sourceModels.add(sourceModel4);
+        sourceModels.add(sourceModel5);
+        sourceModels.add(sourceModel6);
+        sourceModels.add(sourceModel7);
+        return sourceModels;
+    }
+
 
     public Observable<NewsModel> loadNewsDataFromApi(int page, int pageSize,String country) {
         return newsApiClient.getCountryTopHead(country,pageSize,page, api_key)
                 /*.filter(filterForNull())*/;
        // return  Observable.just("abhi","aakash","patta","vinay","shalu","rahul");
+    }
+
+    public Observable<SourceModel> loadSourcesWithCategory(String category) {
+        return newsSourceClient.getSourceData("en",category, api_key)
+                /*.filter(filterForNull())*/;
+        // return  Observable.just("abhi","aakash","patta","vinay","shalu","rahul");
     }
 
     /*private Predicate<? super CountryTopHeadNews> filterForNull() {
