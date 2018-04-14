@@ -39,7 +39,7 @@ public class NewsFragment extends Fragment implements NewsView,NewsAdapterView{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_news,container,false);
+        view=inflater.inflate(R.layout.recycler_view,container,false);
         ButterKnife.bind(this,view);
         ((NewsApplication) getActivity().getApplicationContext()).getNewsAppComponent().c(this);
         initializeView();

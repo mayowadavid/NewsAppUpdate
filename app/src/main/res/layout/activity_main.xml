@@ -5,20 +5,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.BottomNavigationView
+    <include layout="@layout/toolbar_main"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"></include>
+
+    <android.support.design.widget.BottomNavigationView
         android:id="@+id/main_bottom_navigation_view"
-        android:background="@color/colorBlackShade3"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/bottom_navigation_item"
+        android:background="@color/colorBlackShade3"
+        app:itemIconTint="@drawable/bottom_navigation_item_state"
         app:itemTextColor="@drawable/bottom_navigation_item_state"
-        app:itemIconTint="@drawable/bottom_navigation_item_state">
-    </android.support.design.widget.BottomNavigationView>
+        app:menu="@menu/bottom_navigation_item"></android.support.design.widget.BottomNavigationView>
 
     <FrameLayout
+        android:id="@+id/main_frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/main_frame_layout"
-        android:layout_above="@id/main_bottom_navigation_view"></FrameLayout>
+        android:layout_above="@id/main_bottom_navigation_view"
+        android:layout_below="@+id/main_toolbar"></FrameLayout>
 </RelativeLayout>

@@ -7,15 +7,21 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import abhishekint.com.newsappupdate.NewsApplication;
 import abhishekint.com.newsappupdate.R;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationLayer.NewsFragment;
+import abhishekint.com.newsappupdate.app.MainActivity.SearchFragment.MainPresenter;
+import abhishekint.com.newsappupdate.app.MainActivity.SearchFragment.SearchFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import timber.log.Timber;
 
@@ -23,10 +29,12 @@ import timber.log.Timber;
  * Created by abhishek on 14-03-2018.
  */
 
-public class MainActivity extends AppCompatActivity implements MainActivityMethodCall, BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements MainActivityView, BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     @BindView(R.id.main_frame_layout)
     FrameLayout main_frame_layout;
+    @BindView(R.id.fragment_news_toolbar_search)
+    SearchView fragment_news_toolbar_search;
     @BindView(R.id.main_bottom_navigation_view)
     BottomNavigationView main_bottom_navigation_view;
     Unbinder unbinder;
@@ -42,7 +50,12 @@ public class MainActivity extends AppCompatActivity implements MainActivityMetho
         presenterInit();
         initializeViews();
         initializeRest();
+        initializeToolbar();
         firstTimeApplaunch(new NewsFragment());
+    }
+
+    private void initializeToolbar() {
+        fragment_news_toolbar_search.setOnSearchClickListener(this);
     }
 
     private void initializeRest() {
@@ -54,13 +67,9 @@ public class MainActivity extends AppCompatActivity implements MainActivityMetho
     }
 
     private void presenterInit() {
-        mainPresenter = new MainPresenter(this);
+        mainPresenter = new MainPresenterImpl(this);
     }
 
-    /*@OnClick(R.id.activity_main_tv)
-    public void buttonClick() {
-        activity_main_tv.setText("Awesome Life!");
-    }*/
 
     @Override
     protected void onDestroy() {
@@ -105,5 +114,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityMetho
                 break;
         }
         return false;
+    }
+
+    @Override
+    public void onClick(View view) {
+        mainPresenter.SearchButtonClick(new SearchFragment());
     }
 }
