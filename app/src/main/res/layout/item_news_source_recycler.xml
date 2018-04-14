@@ -20,7 +20,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#64545454"></View>
+            android:background="#7e000000"></View>
         <TextView
             android:id="@+id/item_news_source_recycler_tv"
             android:layout_width="match_parent"

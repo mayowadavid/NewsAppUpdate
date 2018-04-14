@@ -42,7 +42,7 @@ public class NewsApiHit {
         newsModel4.setNameId("au");
         NewsModel newsModel5 = new NewsModel();
         newsModel5.setTopName("Top Britain");
-        newsModel5.setNameId("br");
+        newsModel5.setNameId("gb");
 
         newsModels.add(newsModel1);
         newsModels.add(newsModel2);

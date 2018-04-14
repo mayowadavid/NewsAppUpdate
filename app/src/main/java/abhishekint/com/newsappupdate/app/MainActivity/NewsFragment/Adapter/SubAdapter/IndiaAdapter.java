@@ -67,12 +67,16 @@ public class IndiaAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             Glide.with(context)
                     .load(newsModel.getArticles().get(position-1).getUrlToImage())
                     .thumbnail(Glide.with(context).load(R.drawable.default_news_img))
-                    .into(((NewsItemViewHolder)holder).imageView);
+                    .into(((NewsItemViewHolder)holder).item_news_recycler_image_iv);
             else
                 Glide.with(context)
                         .load(R.drawable.default_news_img)
-                        .into(((NewsItemViewHolder)holder).imageView);
-            ((NewsItemViewHolder)holder).textView.setText(newsModel.getArticles().get(position-1).getTitle());
+                        .into(((NewsItemViewHolder)holder).item_news_recycler_image_iv);
+            ((NewsItemViewHolder)holder).item_news_recycler_title_tv.setText(newsModel.getArticles().get(position-1).getTitle());
+            if (newsModel.getArticles().get(position-1).getSource()!=null)
+            ((NewsItemViewHolder)holder).item_news_recycler_source_tv.setText(newsModel.getArticles().get(position-1).getSource().getName());
+            else
+                ((NewsItemViewHolder)holder).item_news_recycler_source_tv.setVisibility(View.GONE);
         }
     }
 

@@ -13,11 +13,12 @@ import abhishekint.com.newsappupdate.R;
  */
 
 public class NewsItemViewHolder extends RecyclerView.ViewHolder {
-    public ImageView imageView;
-    public TextView textView;
+    public ImageView item_news_recycler_image_iv;
+    public TextView item_news_recycler_title_tv,item_news_recycler_source_tv;
     public NewsItemViewHolder(View itemView) {
         super(itemView);
-        imageView=(ImageView)itemView.findViewById(R.id.item_news_recycler_iv);
-        textView=(TextView)itemView.findViewById(R.id.item_news_recycler_tv);
+        item_news_recycler_image_iv=(ImageView)itemView.findViewById(R.id.item_news_recycler_image_iv);
+        item_news_recycler_title_tv=(TextView)itemView.findViewById(R.id.item_news_recycler_title_tv);
+        item_news_recycler_source_tv=(TextView)itemView.findViewById(R.id.item_news_recycler_source_tv);
     }
 }

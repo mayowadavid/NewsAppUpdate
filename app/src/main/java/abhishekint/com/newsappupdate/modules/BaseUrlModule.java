@@ -30,7 +30,7 @@ public class BaseUrlModule {
     @Provides
     @Named("api_key")
     public String getApiKey(Context applicationContext) {
-        return applicationContext.getString(R.string.api_key3);
+        return applicationContext.getString(R.string.api_key);
     }
 
     @Provides
