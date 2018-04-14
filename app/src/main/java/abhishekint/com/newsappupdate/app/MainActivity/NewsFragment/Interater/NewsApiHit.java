@@ -3,10 +3,10 @@ package abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Interater;
 import java.util.ArrayList;
 import java.util.List;
 
+import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationModel.EverythingModel;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationModel.NewsModel;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationModel.SourceModel;
 import io.reactivex.Observable;
-import io.reactivex.functions.Predicate;
 
 /**
  * Created by abhishek on 19-03-2018.
@@ -15,13 +15,13 @@ import io.reactivex.functions.Predicate;
 public class NewsApiHit {
 
     NewsApiClient newsApiClient;
-    NewsIconClient newsIconClient;
+    NewsEverythingClient newsEverythingClient;
     NewsSourceClient newsSourceClient;
     public String api_key;
 
-    public NewsApiHit(NewsApiClient newsApiClient, NewsIconClient newsIconClient, NewsSourceClient newsSourceClient,String api_key) {
+    public NewsApiHit(NewsApiClient newsApiClient, NewsEverythingClient newsEverythingClient, NewsSourceClient newsSourceClient, String api_key) {
         this.newsApiClient = newsApiClient;
-        this.newsIconClient = newsIconClient;
+        this.newsEverythingClient = newsEverythingClient;
         this.newsSourceClient=newsSourceClient;
         this.api_key = api_key;
     }
@@ -101,6 +101,13 @@ public class NewsApiHit {
         // return  Observable.just("abhi","aakash","patta","vinay","shalu","rahul");
     }
 
+    public Observable<EverythingModel> loadSearchDataFromApi(String query) {
+        return newsEverythingClient.getCountryTopHead(query,"en","popularity",5, api_key);
+                /*.filter(filterForNull())*/
+        // return  Observable.just("abhi","aakash","patta","vinay","shalu","rahul");
+    }
+
+
     /*private Predicate<? super CountryTopHeadNews> filterForNull() {
         return new Predicate<CountryTopHeadNews>() {
             @Override
@@ -111,7 +118,7 @@ public class NewsApiHit {
     }*/
     /*public Observable<NewsSourceIconDataModel> loadNewsIconFromApi()
     {
-        return newsIconClient.getNewsIconImg("http://abhishekint.16mb.com/NewsApp/retrieve.php")
+        return newsEverythingClient.getNewsIconImg("http://abhishekint.16mb.com/NewsApp/retrieve.php")
                 .filter(filterIconForNull());
         *//*return  Observable.just("abhi","aakash","patta","vinay","shalu","rahul");*//*
     }

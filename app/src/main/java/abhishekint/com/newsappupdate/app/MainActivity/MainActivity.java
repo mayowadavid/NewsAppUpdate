@@ -8,20 +8,22 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 import abhishekint.com.newsappupdate.NewsApplication;
 import abhishekint.com.newsappupdate.R;
+import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.Interater.NewsApiHit;
 import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationLayer.NewsFragment;
-import abhishekint.com.newsappupdate.app.MainActivity.SearchFragment.MainPresenter;
+import abhishekint.com.newsappupdate.app.MainActivity.NewsFragment.PresentationModel.EverythingModel;
 import abhishekint.com.newsappupdate.app.MainActivity.SearchFragment.SearchFragment;
+import abhishekint.com.newsappupdate.schedulers.AppSchedulerProvider;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import butterknife.Unbinder;
 import timber.log.Timber;
 
@@ -29,7 +31,7 @@ import timber.log.Timber;
  * Created by abhishek on 14-03-2018.
  */
 
-public class MainActivity extends AppCompatActivity implements MainActivityView, BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements MainActivityView, BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener, SearchView.OnQueryTextListener {
 
     @BindView(R.id.main_frame_layout)
     FrameLayout main_frame_layout;
@@ -37,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
     SearchView fragment_news_toolbar_search;
     @BindView(R.id.main_bottom_navigation_view)
     BottomNavigationView main_bottom_navigation_view;
+    @Inject
+    public NewsApiHit newsApiHit;
+    @Inject
+    public AppSchedulerProvider appSchedulerProvider;
     Unbinder unbinder;
     MainPresenter mainPresenter;
     FragmentManager fragmentManager;
@@ -56,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
 
     private void initializeToolbar() {
         fragment_news_toolbar_search.setOnSearchClickListener(this);
+        fragment_news_toolbar_search.setOnQueryTextListener(this);
     }
 
     private void initializeRest() {
@@ -67,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
     }
 
     private void presenterInit() {
-        mainPresenter = new MainPresenterImpl(this);
+        mainPresenter = new MainPresenterImpl(this,newsApiHit,appSchedulerProvider);
     }
 
 
@@ -86,7 +93,22 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
     }
 
     @Override
-    public void launchFragment(Fragment fragment) {
+    public void launchFragmentWIthoutSaving(Fragment fragment) {
+        fragmentManager.beginTransaction()
+                .add(R.id.main_frame_layout, fragment)
+                .commit();
+    }
+
+    @Override
+    public void showToast(String toastMsg) {
+        Toast.makeText(this,toastMsg,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void searchCallWithData(Fragment fragment, EverythingModel everythingModel) {
+        SearchFragment searchFragment= (SearchFragment) fragment;
+        searchFragment.getSearchQueryData(everythingModel);
+        launchFragmentWIthoutSaving(fragment);
     }
 
     @Override
@@ -102,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
                 }
                 else if (!fragmentManager.findFragmentById(R.id.main_frame_layout).getClass().getName().equals(new NewsFragment().getClass().getName()))
                 {
-                    launchFragment(new NewsFragment());
+                    firstTimeApplaunch(new NewsFragment());
                     Toast.makeText(this, "opening News", Toast.LENGTH_SHORT).show();
                 }
                 else
@@ -118,6 +140,18 @@ public class MainActivity extends AppCompatActivity implements MainActivityView,
 
     @Override
     public void onClick(View view) {
-        mainPresenter.SearchButtonClick(new SearchFragment());
+        mainPresenter.SearchButtonClick(new SearchFragment(),"","onclick");
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        mainPresenter.SearchButtonClick(new SearchFragment(),query,"textsubmit");
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        mainPresenter.SearchButtonClick(new SearchFragment(),newText,"textchange");
+        return false;
     }
 }
